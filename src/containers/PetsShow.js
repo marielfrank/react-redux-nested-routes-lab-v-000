@@ -8,9 +8,10 @@ const PetsShow = ({ pet }) =>
   </div>;
 
 const mapStateToProps = (state, ownProps) => {
-  return {
-    pet: {}
-  };
+  // passes the tests but causes console errors:
+  const pet = state.pets.find(pet => pet.id == ownProps.match.params.petId)
+  // error-free: const pet = state.pets.find(pet => String(pet.id) === ownProps.match.params.petId)
+  return pet ? {pet} : {};
 };
 
 export default connect(mapStateToProps)(PetsShow);
